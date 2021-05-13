@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
+
 const {upload} = require("../middleware/upload.helper");
+const {resize, blur} = require("../middleware/photo.helper");
 
 
 router.get("/", function (req, res, next) {
@@ -8,7 +10,7 @@ router.get("/", function (req, res, next) {
 });
 
 //upload is a middleWare
-router.post("/", upload.single("image"), function (req, res, next) {
+router.post("/", upload.single("image"), resize, blur, function (req, res, next) {
   console.log({file: req.file})
   res.json({ status: "ok", data: "create a meme" });
 });

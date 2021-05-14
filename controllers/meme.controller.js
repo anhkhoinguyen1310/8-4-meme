@@ -1,5 +1,5 @@
 const fs = require("fs");
-const photoHelper = require("../middleware/photos.helper");
+const photoHelper = require("../middleware/photo.helper");
 
 const createMeme = async (req, res, next) => {
   try {

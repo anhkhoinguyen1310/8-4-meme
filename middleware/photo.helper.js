@@ -63,7 +63,3 @@ module.exports = {
     resize,
     putTextOnImage
 };
-module.exports = {
-  resize,
-  blur,
-};

@@ -4,7 +4,7 @@ const photoHelper = require("../middleware/photo.helper");
 const createMeme = async (req, res, next) => {
   try {
     // Read data from the json file
-    let rawData = fs.readFileSync("memes.json");
+    let rawData = fs.readFileSync("./controllers/memes.json");
     let memes = JSON.parse(rawData).memes;
 
     const meme = {};
@@ -33,13 +33,26 @@ const createMeme = async (req, res, next) => {
     meme.createdAt = Date.now();
     meme.updatedAt = Date.now();
     memes.unshift(meme);
-    fs.writeFileSync("memes.json", JSON.stringify({ memes }));
+    fs.writeFileSync("./controllers/memes.json", JSON.stringify({ memes }));
     res.status(201).json(meme);
   } catch (err) {
     next(err);
   }
 };
+ 
+const getAllMemes = async (req, res) =>{
+  try {
+    let rawData = fs.readFileSync("./controllers/memes.json");
+    let memes = JSON.parse(rawData).memes;
+    console.log ({memes})
 
+  } catch (error)
+  {
+
+  }
+
+}
 module.exports = {
   createMeme,
+  getAllMemes,
 };

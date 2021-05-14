@@ -1,18 +1,19 @@
+
 const express = require("express");
 const router = express.Router();
 
-const {upload} = require("../middleware/upload.helper");
-const {resize, blur} = require("../middleware/photo.helper");
+const { upload } = require("../middleware/upload.helper");
+const { resize } = require("../middleware/photo.helper");
+const { createMeme } = require("../controllers/meme.controller");
 
 
 router.get("/", function (req, res, next) {
-  res.json({ status: "ok", data: "Get all memes" });
+    res.json({ status: "ok", data: "Get all memes" });
 });
 
-//upload is a middleWare
-router.post("/", upload.single("image"), resize, blur, function (req, res, next) {
-  console.log({file: req.file})
-  res.json({ status: "ok", data: "create a meme" });
+router.post("/", upload.single("image"), resize, createMeme, (req, res, next) => {
+    console.log(req.file);
+    res.json({ status: "ok" });
 });
-// multer help to capture files that are sent from postman 
+
 module.exports = router;

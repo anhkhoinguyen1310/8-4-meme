@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
+import Navbarr from './components/Navbarr'
 
 function App() {
   const [memes, setMemes] = useState([])
@@ -40,6 +41,7 @@ function App() {
   }
   return (
     <div className="App">
+      <Navbarr/> 
       <h1> Create Meme</h1>
       <form>
         <input type="file" onChange={(e) => setFile(e.target.files[0])} />

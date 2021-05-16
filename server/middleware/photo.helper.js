@@ -23,7 +23,7 @@ const resize = async (req, res, next) => {
             height: image.bitmap.height,
         };
         const promises = texts.map(async (text) => {
-            const font = await Jimp.loadFont(
+               const font = await Jimp.loadFont(
                 Jimp[`FONT_SANS_${text.size}_${text.color}`]
             );
             await image.print(

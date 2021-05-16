@@ -10,7 +10,7 @@ const createMeme = async (req, res, next) => {
     const meme = {};
 
     const texts = JSON.parse(req.body.texts) || [];
-    console.log ({text});
+    console.log ({texts});
     const textsArr = [].concat(texts); // Make sure texts is an array.
     meme.texts = textsArr
 
@@ -27,7 +27,7 @@ const createMeme = async (req, res, next) => {
     await photoHelper.putTextOnImage(
       meme.originalImagePath,
       meme.outputMemePath,
-      meme.texts 
+      meme.texts,
     );
 
     // Add the new meme to the beginning of the list and save to the json file

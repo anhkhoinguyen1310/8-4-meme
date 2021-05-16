@@ -9,9 +9,10 @@ const createMeme = async (req, res, next) => {
 
     const meme = {};
 
-    const texts = req.body.texts || [];
+    const texts = JSON.parse(req.body.texts) || [];
+    console.log ({text});
     const textsArr = [].concat(texts); // Make sure texts is an array.
-    meme.texts = textsArr.map((text) => JSON.parse(text));
+    meme.texts = textsArr
 
     // Prepare data for the new meme
     meme.id = Date.now();
@@ -26,7 +27,7 @@ const createMeme = async (req, res, next) => {
     await photoHelper.putTextOnImage(
       meme.originalImagePath,
       meme.outputMemePath,
-      meme.texts
+      meme.texts 
     );
 
     // Add the new meme to the beginning of the list and save to the json file
@@ -44,6 +45,7 @@ const getAllMemes = async (req, res) =>{
   try {
     let rawData = fs.readFileSync("./controllers/memes.json");
     let memes = JSON.parse(rawData).memes;
+    res.json({data: memes})
     console.log ({memes})
 
   } catch (error)
@@ -53,6 +55,6 @@ const getAllMemes = async (req, res) =>{
 
 }
 module.exports = {
-  createMeme,
+  createMeme, 
   getAllMemes,
 };
